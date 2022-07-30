@@ -9,16 +9,15 @@ async function findUser(userInfo, result) {
     return await pool.request()
     .input('userName', sql.VarChar, userInfo.userName)
     .input('email', sql.VarChar, userInfo.email)
-    .query(sqlString, (err, data) => {
-        // if(!err) {
-        //     result(null, data.recordset[0])
-        // } else {
+    .query(sqlString, (err, data) => {  
+        if(!err) {
+            result(null, data.recordset[0])
+        } else {
             result(err)
-        // }
+        }
     })
     } catch (err) {
         result(err)
-        // , err , {layout: "errorLayout", title: "Error", err: err}  
     }
     
 }
@@ -28,7 +27,7 @@ async function newUser(data, result) {
             var sqlString = 'INSERT INTO Users(userName, email, password) values (@userName, @email, @password)'
             const pool = await connect;
             return await pool.request()
-            .input('userName',sql.VarChar, data.username)
+            .input('userName',sql.VarChar, data.userName)
             .input('email',sql.VarChar, data.email)
             .input('password',sql.VarChar, data.password)
             .query(sqlString, (err, data) => {
@@ -39,7 +38,7 @@ async function newUser(data, result) {
                 }
             })
         } catch (error) {
-        result(error)
+            result(error)
         }
     }
 

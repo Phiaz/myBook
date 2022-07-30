@@ -9,10 +9,14 @@ function signUp(req, res) {
     res.render('auth/signUp', {layout: 'authLayout', title: 'Đăng ký'})
 }
 
-function test(req, res, next) {
-    User.findUser(req.body, (err, data) => {
-        catchError(res, err)})
-        // res.render('err', {err:err, layout: 'errorLayout'})
+function checkSignUp(req, res, next) {
+    User.newUser(req.body, (err, data) => {
+        if (!err) {
+            res.render('auth/signUpSuccess', {user: data.userName, layout: 'authLayout'})
+        } else{
+            catchError(res , err)
+        }
+    })
 }
 // function login(req, res) {
 //     res.render('auth.login', {layout: 'authLayout', title: 'Đăng nhập'})
@@ -22,5 +26,5 @@ function test(req, res, next) {
 //     res.render('auth.login', {layout: 'authLayout', title: 'Đăng nhập'})
 // }
 module.exports = {
-    signUp, login, test
+    signUp, login, checkSignUp
 }

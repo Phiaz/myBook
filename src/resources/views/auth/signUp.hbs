@@ -2,8 +2,14 @@
 	<h1 font-family="Courier New">Đăng ký</h1>
 	<div class="main-agileinfo">
 		<div class="agileits-top">
-			<form action="/auth/signup" method="post">
-				<input class="text" type="text" name="username" placeholder="Username" required="">
+			<form method="post">
+				{{#if userNameErr}}
+				<label for="userName" style="color:red ">{{userNameErr}}</label>
+				{{/if}}
+				<input class="text" type="text" name="userName" placeholder="Username" required="">
+				{{#if emailErr}}
+				<label for="email" style="color:red ">{{emailErr}}</label>
+				{{/if}}
 				<input class="text email" type="email" name="email" placeholder="Email" required="">
 				<input class="text" type="password" name="password" placeholder="Password" required="">
 				<input class="text w3lpass" type="password" name="confirmPassword" placeholder="Confirm Password" required="">
