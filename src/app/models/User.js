@@ -21,7 +21,6 @@ async function findUser(userInfo, result) {
     }
     
 }
-
 async function newUser(data, result) {
         try {
             var sqlString = 'INSERT INTO Users(userName, email, password) values (@userName, @email, @password)'
