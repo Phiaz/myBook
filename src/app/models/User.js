@@ -1,5 +1,7 @@
 const catchError = require('../controllers/catchError')
 const {connect, sql } = require('../../config/database');
+const md5 = require('md5');
+
 
 //
 async function findUser(userInfo, result) {
@@ -23,12 +25,13 @@ async function findUser(userInfo, result) {
 }
 async function newUser(data, result) {
         try {
+            const hashedPassword = md5(data.password)
             var sqlString = 'INSERT INTO Users(userName, email, password) values (@userName, @email, @password)'
             const pool = await connect;
             return await pool.request()
             .input('userName',sql.VarChar, data.userName)
             .input('email',sql.VarChar, data.email)
-            .input('password',sql.VarChar, data.password)
+            .input('password',sql.VarChar, hashedPassword)
             .query(sqlString, (err, data) => {
                 if (!err) { 
                     result(null, data)
