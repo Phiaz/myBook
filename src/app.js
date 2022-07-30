@@ -1,10 +1,9 @@
 const path = require('path')
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = 3000;
 const route = require('./routes/index')
-const env = require('dotenv')
-const envConfig = env.config()
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const handlebars = require('express-handlebars')

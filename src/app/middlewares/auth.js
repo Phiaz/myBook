@@ -24,6 +24,22 @@ async function checkExisted(req, res, next) {
     }
 }
 
+async function validLogin(req, res, next) {
+    try {
+        await User.findUser(req.body, (err, data) => {
+            if(err) {
+                return errorCatcher(res, err)
+            }
+            if (data) {
+                
+            }
+        })
+    } catch (error) {
+        errorCatcher(res, error)
+        
+    }
+}
+
 module.exports = {
     checkExisted
 }
