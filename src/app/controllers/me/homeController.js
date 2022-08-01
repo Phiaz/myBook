@@ -1,5 +1,9 @@
+const jwt = require('jsonwebtoken')
+
+
+
 function home(req, res, next) {
-    res.send('home')
+    res.render('me/home', {layout: 'userLayout'})
 }
 
 module.exports = {

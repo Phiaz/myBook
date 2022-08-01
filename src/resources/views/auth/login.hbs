@@ -3,7 +3,13 @@
 	<div class="main-agileinfo">
 		<div class="agileits-top">
 			<form action="/auth/login" method="post">
+				{{#if userNameErr}}
+				<label for="username" style ="color:red">{{userNameErr}}</label>
+				{{/if}}
 				<input class="text" type="text" name="userName" placeholder="Username" required="">
+				{{#if passwordErr}}
+				<label for="password" style="color:red">{{passwordErr}}</label>
+				{{/if}}
 				<input class="text" type="password" name="password" placeholder="Password" required="">
 				<div class="wthree-text">
 					<div class="clear"> </div>
