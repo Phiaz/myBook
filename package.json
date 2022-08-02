@@ -20,7 +20,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --inspect src/app.js",
     "watch": "node-sass --watch src/resources/scss/login.scss --output src/public/css",
-    "watch-main": "node-sass --watch src/resources/scss/main.scss --output src/public/css"
+    "watch-main": "node-sass --watch src/resources/scss/main.scss --output src/public/css",
+    "watch-test": "node-sass --watch src/resources/scss/test.scss --output src/public/css"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,66 @@
+<form class="mt-4" name="container-form" method = "POST" action = "/books/handle-form-action">
+    <h3>My book</h3>
+    <a href="/me/trash/books">Sách đã xóa ({{deletedCount}} quyển)</a>
+
+    <div class="mt-4 d-flex align-items-center ">
+      <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="checkbox-all">
+      <label class="form-check-label" for="checkbox-all">Chọn tất cả</label>
+      </div>
+
+       
+      <select class="form-row aligns-items-center col-auto my-1" name="action" required>
+          <option value="">--Chọn hành động--</option>
+          <option value ="delete">Xóa</option>
+      </select>
+        
+      <button class="btn btn-primary btn-sm select-box-options check-all-submit-btn" disabled="disabled">Áp dụng</button>
+    </div>
+    <div class="mt-4"></div>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col" colspan="2">#</th>
+            <th scope="col">
+              Tên sách
+            </th>
+            <th scope="col">
+              Tác giả
+            </th>
+            <th scope="col">
+              Lần cuối cập nhật
+            </th>
+            <td></td>
+            <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+            <tr>
+                <td>                
+                  <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="bookIds[]" value="{{this._id}}">
+                  </div>
+                </td>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.author}}</td>
+                <td>{{this.updatedAt}}</td>
+                <td>
+                <a href="/books/{{this.slug}}" class="btn btn-link">Xem review</a>
+                <a href="/books/{{this._id}}/edit" class="btn btn-link">Chỉnh sửa</a>
+                <td><a href="" class="btn btn-link" data-toggle="modal" data-target="#delete-book-modal" id = 'delete-button' data-id="{{this._id}}">Xóa</a></td>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+              <td colspan="5" class="text-center">Bạn chưa đăng bất kỳ review nào.</td>
+            </tr>
+            <tr>
+              <td colspan="5" class="text-center"><a href="/books/create">Nhấn vào đây để đăng review đầu tiên của mình nhé. Cố lên nào 👻</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+</table>
+</form>

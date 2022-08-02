@@ -58,3 +58,10 @@ img {
 
 .select-box-options {
   margin: 0 16px; }
+
+.img-circle {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+}
+  /* margin-right: 4px; } */

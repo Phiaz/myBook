@@ -1,25 +1,37 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-xl">
-    <a class="navbar-brand" href="/">Phi's Books</a>
-    <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/me/home">My Books</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="news">Tin tức <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/me/msg">Tin nhắn</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Thông báo</a>
+        </li>
+
+
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-          <img src="https://i.pinimg.com/474x/e6/e2/d0/e6e2d0e4989ad9a60fbd1c638714864b.jpg" alt="" class="user-avatar">
-            {{data.userName}}
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            <img src="https://i.pinimg.com/474x/e6/e2/d0/e6e2d0e4989ad9a60fbd1c638714864b.jpg" alt="" class="user-avatar">
+              {{{userName}}}
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <div class="dropdown-menu">
             <a class="dropdown-item" href="/me/profile/{{{userName}}}">Trang cá nhân</a>
-            <a class="dropdown-item" href="/me/upload">Đăng sách</a>
-            <a class="dropdown-item" href="/me/library">Sách của tôi</a>
+            <a class="dropdown-item" href="/me/review/upload">Đăng sách</a>
+            <a class="dropdown-item" href="/me/review/library">Sách của tôi</a>
             {{{roleView}}}
             <hr class="dropdown-divider">
             <a class="dropdown-item" href="/auth/logout">Đăng xuất</a>
