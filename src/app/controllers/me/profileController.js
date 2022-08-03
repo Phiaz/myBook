@@ -1,3 +1,4 @@
+const { response } = require('express')
 const Review = require('../../models/Review')
 const catchError = require('../catchError')
 
@@ -13,6 +14,10 @@ function profile(req, res, next) {
     })
 }
 
+function setting(req, res, next) {
+    res.render('me/setting', {layout: 'userLayout'})
+}
+
 module.exports = {
-    profile
+    profile, setting
 }

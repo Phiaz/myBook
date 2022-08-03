@@ -1,0 +1,71 @@
+{{!-- user profile --}}
+<div class="container mt-4" >
+	<div class="row m-b-r m-t-3">
+		<div class="col-md-2 offset-md-1">
+			<img src="https://i.pinimg.com/474x/e6/e2/d0/e6e2d0e4989ad9a60fbd1c638714864b.jpg" alt="" class="img-circle">
+		</div>
+		<div class="col-md-9 p-t-2">
+			<h2 class="h2">
+				{{{userName}}} 
+				<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false">
+					Follow
+				</button>
+			</h2>
+			<p>{{{userName}}}</p>
+			<ul class="flex-menu">
+				<li><strong>Email</strong></li>
+				<li><strong>full name</strong></li>
+			</ul> 
+		</div>
+	</div>
+</div>
+
+
+<div class="mt-4 container">
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email</label>
+      <input type="email" class="form-control" id="inputEmail4">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Password</label>
+      <input type="password" class="form-control" id="inputPassword4">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+  <div class="form-group">
+    <label for="inputAddress2">Address 2</label>
+    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState">State</label>
+      <select id="inputState" class="form-control">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+</div>

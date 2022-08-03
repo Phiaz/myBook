@@ -13,16 +13,22 @@ function allReviews(req, res, next) {
 function uploadReview(req, res, next) {
     Review.newReview(req.cookies, req.body, (err, bookName) => {
         if (!err) {
-            res.redirect(`me/profile/${req.cookies.userName}`)
+            res.redirect(`/me/profile/${req.cookies.userName}`)
         } else {
             catchError(res , err)
         }
     })
 }
 
-// function detail(req, res, next) {
-//     res.render()
-// }
+function detail(req, res, next) {
+    Review.findReview(req.params.tweetId, (err, data) => {
+        if (!err) {
+            res.render('me/showReview', {tweet: data, layout: 'userLayout'})
+        } else {
+            catchError(res , err)
+        }
+    })
+}
 module.exports = {
-    upload, allReviews, uploadReview
+    upload, allReviews, uploadReview, detail
 }

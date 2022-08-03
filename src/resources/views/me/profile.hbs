@@ -28,13 +28,13 @@
             {{#each reviews}}
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-course-item" style="width: 19rem;">
-                    <a href="/books/{{this.slug}}">
+                    <a href="/me/review/{{this.tweetId}}">
                         <div class="img-size">
                             <img src="https://seo-websitedesign.com/wp-content/uploads/2020/04/rung-na-uy.jpg" class="card-img-top" alt="...">
                         </div>
                     </a>
                     <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none">
+                        <a href="/me/review/{{this.tweetId}}" style="text-decoration: none">
                             <h5 class="card-title">{{this.bookName}}</h5>
                         </a>
                         {{!-- <p class="card-text">{{this.description}}</p> --}}
