@@ -34,6 +34,7 @@ async function checkLogin(req, res) {
                 return res.render('auth/login', {layout: 'authLayout', passwordErr: 'Sai mật khẩu'})
             }
             const accessToken = jwt.sign({
+                userId: data.userId,
                 userName: data.userName,
                 email: data.email,
                 role: data.role

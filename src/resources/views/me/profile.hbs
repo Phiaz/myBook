@@ -21,11 +21,11 @@
 	</div>
 </div>
 
+
 <div class="mt-4">
     <div class="container">
-            <div class="row">
-            
-            {{!-- cards --}}
+            <div class="row">   
+            {{#each reviews}}
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-course-item" style="width: 19rem;">
                     <a href="/books/{{this.slug}}">
@@ -35,96 +35,16 @@
                     </a>
                     <div class="card-body">
                         <a href="/books/{{this.slug}}" style="text-decoration: none">
-                            <h5 class="card-title">Rừng nauy</h5>
+                            <h5 class="card-title">{{this.bookName}}</h5>
                         </a>
                         {{!-- <p class="card-text">{{this.description}}</p> --}}
                     </div>
-                        {{!-- <ul class="list-group list-group-flush">
-                            <h5 class="list-group-item font-color">{{this.author}} </h5>
-                            <li class="list-group-item">Năm xuất bản:</li>
+                        <ul class="list-group list-group-flush">
+                            <h6 class="list-group-item font-color">Tác giả: {{this.author}} </h6>
                         </ul>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Xem full review</a>
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Chương đầu</a>
-                    </div> --}}
                 </div>
             </div>
-
-                        <div class="col-sm-6 col-lg-4">
-                <div class="card card-course-item" style="width: 19rem;">
-                    <a href="/books/{{this.slug}}">
-                        <div class="img-size">
-                            <img src="https://seo-websitedesign.com/wp-content/uploads/2020/04/rung-na-uy.jpg" class="card-img-top" alt="...">
-                        </div>
-                    </a>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none">
-                            <h5 class="card-title">Rừng nauy</h5>
-                        </a>
-                        {{!-- <p class="card-text">{{this.description}}</p> --}}
-                    </div>
-                        {{!-- <ul class="list-group list-group-flush">
-                            <h5 class="list-group-item font-color">{{this.author}} </h5>
-                            <li class="list-group-item">Năm xuất bản:</li>
-                        </ul>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Xem full review</a>
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Chương đầu</a>
-                    </div> --}}
-                </div>
-            </div>
-
-
-                        <div class="col-sm-6 col-lg-4">
-                <div class="card card-course-item" style="width: 19rem;">
-                    <a href="/books/{{this.slug}}">
-                        <div class="img-size">
-                            <img src="https://seo-websitedesign.com/wp-content/uploads/2020/04/rung-na-uy.jpg" class="card-img-top" alt="...">
-                        </div>
-                    </a>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none">
-                            <h5 class="card-title">Rừng nauy</h5>
-                        </a>
-                        {{!-- <p class="card-text">{{this.description}}</p> --}}
-                    </div>
-                        {{!-- <ul class="list-group list-group-flush">
-                            <h5 class="list-group-item font-color">{{this.author}} </h5>
-                            <li class="list-group-item">Năm xuất bản:</li>
-                        </ul>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Xem full review</a>
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Chương đầu</a>
-                    </div> --}}
-                </div>
-            </div>
-
-
-                        <div class="col-sm-6 col-lg-4">
-                <div class="card card-course-item" style="width: 19rem;">
-                    <a href="/books/{{this.slug}}">
-                        <div class="img-size">
-                            <img src="https://seo-websitedesign.com/wp-content/uploads/2020/04/rung-na-uy.jpg" class="card-img-top" alt="...">
-                        </div>
-                    </a>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none">
-                            <h5 class="card-title">Rừng nauy</h5>
-                        </a>
-                        {{!-- <p class="card-text">{{this.description}}</p> --}}
-                    </div>
-                        {{!-- <ul class="list-group list-group-flush">
-                            <h5 class="list-group-item font-color">{{this.author}} </h5>
-                            <li class="list-group-item">Năm xuất bản:</li>
-                        </ul>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Xem full review</a>
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Chương đầu</a>
-                    </div> --}}
-                </div>
-            </div>
-
-
+            {{/each}}
         </div> 
     </div>
 </div>

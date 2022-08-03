@@ -1,4 +1,3 @@
-const catchError = require('../controllers/catchError')
 const {connect, sql } = require('../../config/database');
 const md5 = require('md5');
 

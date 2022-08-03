@@ -14,4 +14,6 @@ router.get('/msg', msgController.msg)
 router.get('/profile/:userName', profileController.profile)
 router.get('/review/upload', reviewController.upload)
 router.get('/review/library', reviewController.allReviews)
+
+router.post('/review/upload', reviewController.uploadReview)
 module.exports = router

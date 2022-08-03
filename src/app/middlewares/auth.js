@@ -36,6 +36,7 @@ function verifyToken (req, res, next) {
         res.cookie('userName', data.userName)
         res.cookie('email', data.email)
         res.cookie('role', data.role)
+        res.cookie('userId', data.userId)
         res.locals.userName = data.userName
         res.locals.roleView = function () {
             if (data.role == 'admin') {

@@ -1,3 +1,6 @@
+const Review = require('../../models/Review')
+const catchError = require('../catchError')
+// const firebase = require('../../../config/firebase')
 // [GET] /me/reviews/upload
 function upload(req, res, next) {
     res.render('me/uploadReview', {layout: 'userLayout'})
@@ -6,6 +9,20 @@ function upload(req, res, next) {
 function allReviews(req, res, next) {
     res.render('me/storedReviews', {layout: 'userLayout'})
 }
+
+function uploadReview(req, res, next) {
+    Review.newReview(req.cookies, req.body, (err, bookName) => {
+        if (!err) {
+            res.redirect(`me/profile/${req.cookies.userName}`)
+        } else {
+            catchError(res , err)
+        }
+    })
+}
+
+// function detail(req, res, next) {
+//     res.render()
+// }
 module.exports = {
-    upload, allReviews
+    upload, allReviews, uploadReview
 }
