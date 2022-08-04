@@ -5,13 +5,13 @@
 			<img src="https://i.pinimg.com/474x/e6/e2/d0/e6e2d0e4989ad9a60fbd1c638714864b.jpg" alt="" class="img-circle">
 		</div>
 		<div class="col-md-9 p-t-2">
-			<h2 class="h2">
+			<h2>
 				{{{userName}}} 
 				<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false">
 					Follow
 				</button>
 			</h2>
-			<p>{{{userName}}}</p>
+			<h5><i>{{{nickName}}}</i></h5>
 			<ul class="flex-menu">
 				<li><strong>41</strong> posts</li>
 				<li><strong>47k</strong> followers</li>
@@ -44,38 +44,15 @@
                         </ul>
                 </div>
             </div>
+
+            {{else}}
+            <div class="container mt-4">
+                <a href="/me/review/upload"><h3 style="margin-left: 100px">Nhấn vào đây để đăng review đầu tiên của mình nhé. Cố lên nào 👻</h3></a>
+            </div>
             {{/each}}
         </div> 
     </div>
 </div>
 
-            {{!-- {{#each courses}}
-            <div class="col-sm-6 col-lg-4">
-                <div class="card card-course-item" style="width: 19rem;">
-                    <a href="/books/{{this.slug}}">
-                        <div class="img-size">
-                            <img src="{{this.img}}" class="card-img-top" alt="...">
-                        </div>
-                    </a>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none">
-                            <h5 class="card-title">{{this.name}}</h5>
-                        </a>
-                        <p class="card-text">{{this.description}}</p>
-                    </div>
-                        <ul class="list-group list-group-flush">
-                            <h5 class="list-group-item font-color">{{this.author}} </h5>
-                            <li class="list-group-item">Năm xuất bản:</li>
-                        </ul>
-                    <div class="card-body">
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Xem full review</a>
-                        <a href="/books/{{this.slug}}" style="text-decoration: none" class="card-link">Chương đầu</a>
-                    </div>
-                </div>
-            </div>
-            {{/each}} --}}
-        </div> 
-    </div>
-</div>
 
 		

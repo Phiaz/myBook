@@ -7,18 +7,23 @@ const reviewController = require('../app/controllers/me/reviewController')
 const msgController = require('../app/controllers/me/msgController')
 const newsController = require('../app/controllers/newsController')
 
-
+// GET me
 router.get('/home', homeController.home)
 router.get('/news', newsController.news)
 router.get('/msg', msgController.msg)
 router.get('/profile/:userName', profileController.profile)
 router.get('/setting', profileController.setting)
 
-
+//GET review
 router.get('/review/upload', reviewController.upload)
-router.get('/review/:tweetId', reviewController.detail)
 router.get('/review/library', reviewController.allReviews)
+router.get('/review/:tweetId', reviewController.detail)
 
 
+// POST Review
 router.post('/review/upload', reviewController.uploadReview)
+
+
+//Put me
+router.patch('/setting/:userId', profileController.profileUpdate)
 module.exports = router

@@ -52,13 +52,13 @@
                 <a href="/books/{{this._id}}/edit" class="btn btn-link">Chỉnh sửa</a>
                 <td><a href="" class="btn btn-link" data-toggle="modal" data-target="#delete-book-modal" id = 'delete-button' data-id="{{this._id}}">Xóa</a></td>
                 </td>
-            </tr>
+            </tr> 
             {{else}}
             <tr>
               <td colspan="5" class="text-center">Bạn chưa đăng bất kỳ review nào.</td>
             </tr>
             <tr>
-              <td colspan="5" class="text-center"><a href="/books/create">Nhấn vào đây để đăng review đầu tiên của mình nhé. Cố lên nào 👻</a></td>
+              <td colspan="5" class="text-center"><a href="/me/review/upload">Nhấn vào đây để đăng review đầu tiên của mình nhé. Cố lên nào 👻</a></td>
             </tr>
             {{/each}}
         </tbody>
