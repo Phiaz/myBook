@@ -66,6 +66,41 @@ async function updateUser(id ,user, result) {
         result(err)
     }
 }
+
+async function searchByUserName(id, data, result) {
+    try {
+        const sqlString  = `select * from users where userName like N'%${data}%'`
+        const pool = await connect;
+        return await pool.request()
+        .query(sqlString, (err, data) => {
+            if (!err) { 
+                result(null, data.recordset)
+            } else {
+                result(err)
+            }
+        })
+    } catch(err) {
+        result(err)
+    }
+}
+
+async function searchByNickName(id, data, result) {
+    try {
+        const sqlString  = `select * from users where nickName like N'%${data}%'`
+        const pool = await connect;
+        return await pool.request()
+        .query(sqlString, (err, data) => {
+            if (!err) { 
+                result(null, data.recordset)
+            } else {
+                result(err)
+            }
+        })
+    } catch(err) {
+        result(err)
+    }
+}
+
 module.exports = {
-    findUser, newUser, updateUser
+    findUser, newUser, updateUser, searchByUserName, searchByNickName
 }

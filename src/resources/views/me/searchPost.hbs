@@ -1,0 +1,24 @@
+<div class="container mt-4" style="margin-left: 250px">
+
+{{#each tweets}}
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="..." alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <a href=""><h5 class="card-title">{{this.bookName}}</h5></a>
+        <p class="card-text">{{this.author}}</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{else}}
+<h1>Không tìm thấy kết quả phù hợp</h1>
+
+
+{{/each}}
+</div>

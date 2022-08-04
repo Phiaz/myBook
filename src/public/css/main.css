@@ -82,3 +82,6 @@ body,
   height: 180px;
   border-radius: 50%;
   margin-right: 4px; }
+
+.search-margin {
+  margin-left: 8px; }

@@ -6,7 +6,7 @@ const profileController = require('../app/controllers/me/profileController')
 const reviewController = require('../app/controllers/me/reviewController')
 const msgController = require('../app/controllers/me/msgController')
 const newsController = require('../app/controllers/newsController')
-
+const searchController = require('../app/controllers/me/searchController')
 // GET me
 router.get('/home', homeController.home)
 router.get('/news', newsController.news)
@@ -22,7 +22,8 @@ router.get('/review/:tweetId', reviewController.detail)
 
 // POST Review
 router.post('/review/upload', reviewController.uploadReview)
-
+router.post('/search', searchController.search)
+router.get('/search', searchController.searchDirect)
 
 //Put me
 router.patch('/setting/:userId', profileController.profileUpdate)

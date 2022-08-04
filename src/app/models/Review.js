@@ -57,6 +57,23 @@ async function findReview(id, result) {
         result(error)
     }
 }
+
+async function searchReviewByName(data, result) {
+    try {
+        const sqlString  = `select * from tweet where bookName like N'%${data}%'`
+        const pool = await connect;
+        return await pool.request()
+        .query(sqlString, (err, data) => {
+            if (!err) { 
+                result(null, data.recordset)
+            } else {
+                result(err)
+            }
+        })
+    } catch(err) {
+        result(err)
+    }
+}
 module.exports = {
-    newReview, allReviews, findReview
+    newReview, allReviews, findReview, searchReviewByName
 }

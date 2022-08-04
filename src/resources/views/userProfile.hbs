@@ -7,6 +7,9 @@
 		<div class="col-md-3 p-t-2" style="margin-left: 50px">
 			<h2>
 				{{{userName}}} 
+				<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false">
+					Follow
+				</button>
 			</h2>
 			<h5><i>{{{nickName}}}</i></h5>
 			<ul>
@@ -44,7 +47,7 @@
 
             {{else}}
             <div class="container mt-4">
-                <a href="/me/review/upload"><h3 style="margin-left: 100px">Nhấn vào đây để đăng review đầu tiên của mình nhé. Cố lên nào 👻</h3></a>
+                <h3 style="margin-left: 100px">Người dùng này chưa đăng review nào</h3>
             </div>
             {{/each}}
         </div> 
