@@ -89,11 +89,16 @@ body,
     width:48px;
     height:auto;
 }
-
 .flex-menu {
     display:flex;
 }
 
 .flex-menu li:not(:last-child) {
     margin-right:40px;
+}
+.img-circle{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-right: 4px;
 }

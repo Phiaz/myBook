@@ -25,7 +25,7 @@ function profileUpdate(req, res, next) {
     User.updateUser(req.cookies.userId, req.body, (err, data) => {
         if (!err) {
             // res.json(data)
-            res.render('me/profile', {layout: 'userLayout', reviews: data})
+            res.redirect(`/me/profile/${req.cookies.userName}`)
         } else {
             catchError(res , err)
         }
