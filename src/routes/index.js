@@ -12,7 +12,7 @@ function route(app) {
     app.use('/auth', authRouter)
     app.use('admin', adminRouter)
     app.use('/me',auth.verifyToken, meRouter)
-    app.use('/:userName', publicRouter)
+    app.use('/public', publicRouter)
     app.use('/', siteRouter)
 }
 module.exports = route

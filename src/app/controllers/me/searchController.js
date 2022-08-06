@@ -7,6 +7,7 @@ function search(req, res, next) {
         case 'tweet':
             Review.searchReviewByName(req.body.search, (err,data) => {
                 if (!err) {
+                    // res.json(data)
                     res.render('me/searchPost', {layout: 'userLayout', tweets: data})
                 } else {
                     catchError(res, err)
@@ -16,6 +17,7 @@ function search(req, res, next) {
         case 'userName':
             User.searchByUserName(req.cookies.userId, req.body.search, (err, data) => {
                 if (!err) {
+                    // res.json(data)
                     res.render('me/searchUser', {layout: 'userLayout', users: data})
                 } else {
                     catchError(res, err)

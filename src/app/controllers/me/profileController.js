@@ -32,6 +32,9 @@ function profileUpdate(req, res, next) {
     })
 }
 
+function follow(req, res, next) {
+    User.updateUser(req, res, next)
+}
 module.exports = {
     profile, setting, profileUpdate
 }

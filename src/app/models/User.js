@@ -1,7 +1,5 @@
 const {connect, sql } = require('../../config/database');
 const md5 = require('md5');
-
-
 //
 async function findUser(userInfo, result) {
     try {
@@ -101,6 +99,28 @@ async function searchByNickName(id, data, result) {
     }
 }
 
+async function follow(data, result) {
+    try {
+        const sqlString  = `insert into'`
+        const pool = await connect;
+        return await pool.request()
+        .query(sqlString, (err, data) => {
+            if (!err) { 
+                result(null, data.recordset)
+            } else {
+                result(err)
+            }
+        })
+    } catch(err) {
+        result(err)
+    }
+}
+
+async function unFollow(data, result) {
+
+}
+
 module.exports = {
-    findUser, newUser, updateUser, searchByUserName, searchByNickName
+    findUser, newUser, updateUser, searchByUserName, searchByNickName, 
+    follow, unFollow
 }

@@ -23,7 +23,7 @@ function uploadReview(req, res, next) {
 function detail(req, res, next) {
     Review.findReview(req.params.tweetId, (err, data) => {
         if (!err) {
-            res.render('me/showReview', {tweet: data, layout: 'userLayout'})
+            res.render('me/showReview', {tweet: data, layout: 'userLayout', user: req.cookies})
         } else {
             catchError(res , err)
         }

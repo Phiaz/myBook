@@ -6,12 +6,12 @@
 		</div>
 		<div class="col-md-3 p-t-2" style="margin-left: 50px">
 			<h2>
-				{{{userName}}} 
+				{{user.userName}} 
 				<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false">
-					Follow
+                    Follow
 				</button>
 			</h2>
-			<h5><i>{{{nickName}}}</i></h5>
+			<h5><i>{{user.nickName}}</i></h5>
 			<ul>
 				<li><strong>41</strong> posts</li>
 				<li><strong>47k</strong> followers</li>
@@ -28,13 +28,13 @@
             {{#each reviews}}
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-course-item" style="width: 19rem;">
-                    <a href="/me/review/{{this.tweetId}}">
+                    <a href="/public/{{this.userName}}/{{this.tweetId}}">
                         <div class="img-size">
                             <img src="https://seo-websitedesign.com/wp-content/uploads/2020/04/rung-na-uy.jpg" class="card-img-top" alt="...">
                         </div>
                     </a>
                     <div class="card-body">
-                        <a href="/me/review/{{this.tweetId}}" style="text-decoration: none">
+                        <a href="/public/{{this.userName}}/{{this.tweetId}}" style="text-decoration: none">
                             <h5 class="card-title">{{this.bookName}}</h5>
                         </a>
                         {{!-- <p class="card-text">{{this.description}}</p> --}}

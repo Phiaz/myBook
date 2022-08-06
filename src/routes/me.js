@@ -11,7 +11,7 @@ const searchController = require('../app/controllers/me/searchController')
 router.get('/home', homeController.home)
 router.get('/news', newsController.news)
 router.get('/msg', msgController.msg)
-router.get('/profile/:userName', profileController.profile)
+router.get('/profile', profileController.profile)
 router.get('/setting', profileController.setting)
 
 //GET review
@@ -24,6 +24,8 @@ router.get('/review/:tweetId', reviewController.detail)
 router.post('/review/upload', reviewController.uploadReview)
 router.post('/search', searchController.search)
 router.get('/search', searchController.searchDirect)
+router.post('/follow', profileController.follow )
+router.delete('/follow', profileController.unFollow)
 
 //Put me
 router.patch('/setting/:userId', profileController.profileUpdate)
