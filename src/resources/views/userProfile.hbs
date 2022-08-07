@@ -4,18 +4,25 @@
 		<div class="col-md-2 offset-md-1">
 			<img src="https://i.pinimg.com/474x/e6/e2/d0/e6e2d0e4989ad9a60fbd1c638714864b.jpg" alt="" class="img-circle">
 		</div>
-		<div class="col-md-3 p-t-2" style="margin-left: 50px">
+		<div class="col-md-4 p-t-3" style="margin-left: 50px">
 			<h2>
-				{{user.userName}} 
-				<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false">
-                    Follow
-				</button>
+                {{#if isFollow}}
+                    <form action="/me/follow/{{user.userId}}?_method=DELETE" method="post">
+                    {{user.userName}}
+                    <button type="submit" class="btn btn-primary">Un follow</button>
+                </form>
+                {{else}}
+                    <form action="/me/follow/{{user.userId}}" method="post">
+                    {{user.userName}}
+                    <button type="submit" class="btn btn-primary">Follow</button>
+                    </form>
+                {{/if}}
 			</h2>
 			<h5><i>{{user.nickName}}</i></h5>
 			<ul>
-				<li><strong>41</strong> posts</li>
-				<li><strong>47k</strong> followers</li>
-				<li><strong>208</strong> following</li>
+				<li><strong>{{reviews.length}}</strong> posts</li>
+				<li><strong>{{follower.length}}</strong> followers</li>
+				<li><strong>{{following.length}}</strong> following</li>
 			</ul> 
 		</div>
 	</div>
@@ -28,13 +35,13 @@
             {{#each reviews}}
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-course-item" style="width: 19rem;">
-                    <a href="/public/{{this.userName}}/{{this.tweetId}}">
+                    <a href="/public/{{this.userId}}/{{this.tweetId}}">
                         <div class="img-size">
                             <img src="https://seo-websitedesign.com/wp-content/uploads/2020/04/rung-na-uy.jpg" class="card-img-top" alt="...">
                         </div>
                     </a>
                     <div class="card-body">
-                        <a href="/public/{{this.userName}}/{{this.tweetId}}" style="text-decoration: none">
+                        <a href="/public/{{this.userId}}/{{this.tweetId}}" style="text-decoration: none">
                             <h5 class="card-title">{{this.bookName}}</h5>
                         </a>
                         {{!-- <p class="card-text">{{this.description}}</p> --}}

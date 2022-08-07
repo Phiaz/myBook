@@ -1,13 +1,17 @@
 const {connect, sql } = require('../../config/database');
 
-async function findProfile (user, result) {
+async function findProfile (userId, followerId, result) {
     try {
-        const sqlString = `select userName, userId, nickName, fullName from users where userName = @userName
+        const sqlString = `select userName, userId, nickName, fullName from users where userId = @userId
 
-        select * from tweet where userid in(select userId from users where userName = @userName)`
+        select * from tweet where userId = @userId
+        
+        select * from followList where userId = @userId and followerId = @followerId
+        `
         const pool = await connect;
         return await pool.request()
-        .input('userName', sql.NVarChar, user)
+        .input('userId', sql.NVarChar, userId)
+        .input('followerId', sql.NVarChar, followerId)
         .query(sqlString, (err, data) => {
             if (!err) { 
                 result(null, data.recordsets)
@@ -26,7 +30,7 @@ async function findReview (data, result) {
         select userName, userId, nickName, fullName from users where userId = @userId
         select * from tweet where tweetId = @tweetId`
         const pool = await connect;
-        return await pool.request()
+        await pool.request()
         .input('userId', sql.NVarChar, data.userId)
         .input('tweetID', sql.Int, data.tweetId )
         .query(sqlString, (err, data) => {

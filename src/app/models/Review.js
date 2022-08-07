@@ -74,6 +74,21 @@ async function searchReviewByName(data, result) {
         result(err)
     }
 }
+
+
+async function testAllReviews(user, result) {
+    try {
+        // const userId = userId
+        var sqlString = 'select * from tweet where userId = @id'
+        const pool = await connect;
+        return await pool.request()
+        .input('id',sql.Int, user)
+        .query(sqlString)
+    } catch (error) {
+        result(error)
+    }
+}
+async function reviewCount(req, res, next) {}
 module.exports = {
-    newReview, allReviews, findReview, searchReviewByName
+    newReview, allReviews, findReview, searchReviewByName, testAllReviews
 }

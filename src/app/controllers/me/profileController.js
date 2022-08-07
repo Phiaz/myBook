@@ -4,11 +4,12 @@ const User = require('../../models/User')
 const catchError = require('../catchError')
 
 
-function profile(req, res, next) {
-    Review.allReviews(req.cookies, (err, data) => {
+async function profile(req, res, next) {
+    const followList = await User.followCount(req.params.userId)
+    await Review.allReviews(req.cookies, async (err, data) => {
         if (!err) {
-            // res.json(data)
-            res.render('me/profile', {layout: 'userLayout', reviews: data})
+            // res.json(followList)
+            res.render(`me/profile`, {layout: 'userLayout', reviews: data, following: followList[1], follower: followList[0]})
         } else {
             catchError(res , err)
         }
@@ -33,8 +34,17 @@ function profileUpdate(req, res, next) {
 }
 
 function follow(req, res, next) {
-    User.updateUser(req, res, next)
+    User.follow(req.params.userId, req.cookies.userId, (err, data) => {
+        res.redirect(`/public/${req.params.userId}`)
+    })
+}
+
+function unFollow(req, res, next) {
+    User.unFollow(req.params.userId, req.cookies.userId, (err, data) => {
+        res.redirect(`/public/${req.params.userId}`)
+    })
 }
 module.exports = {
-    profile, setting, profileUpdate
+    profile, setting, profileUpdate,
+    follow, unFollow
 }

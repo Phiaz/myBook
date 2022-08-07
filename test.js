@@ -1,19 +1,30 @@
-const key = require("./src/config/key")
+const User = require('./src/app/models/User')
 
-arr = [1, 2, 3]
-for (let i = 0; i <arr.length; i++) {
-    let a = 0
-    a++
-    console.log(i)
+const Review = require('./src/app/models/Review')
+// async function test() {
+//     let data = await User.followCount('1013', '1015')
+//     // .then(data => console.log(data))
+//     let reviews = await Review.testAllReviews('1015')
+//     console.log(data)
+//     console.log(reviews)
+// }
+// test()
+
+
+// Promise.all([Review.testAllReviews('1015'), User.followCount('1013', '1015')])
+// .then(([reviews, follower]) => {
+//     console.log(reviews)
+//     console.log(follower)
+// })
+
+async function test() {
+    const data = await User.followCount('1013', '1015')
+    await Review.allReviews('1015', (err, reviews) => {
+        console.log(reviews)
+        console.log(data)
+    })
 }
 
-arr = [
-    {key1 : 'value1'},
-    {key2 : 'value2'},
-    {key3 : 'value3'}
-]
-
-const newArr = arr.forEach((obj) => {
-    obj.newKey = 'abc'
-})
-console.log(arr)
+// User.followCount('1013', '1015')
+// console.log(User.followCount('1013', '1015'))
+test()

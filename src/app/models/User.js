@@ -99,14 +99,16 @@ async function searchByNickName(id, data, result) {
     }
 }
 
-async function follow(data, result) {
+async function follow(userId, followerId, result) {
     try {
-        const sqlString  = `insert into'`
+        const sqlString  = `insert into followList(userId, followerId) values (@userId, @followerId)`
         const pool = await connect;
         return await pool.request()
+        .input('userId', sql.Int, userId)
+        .input('followerId', sql.Int, followerId)
         .query(sqlString, (err, data) => {
             if (!err) { 
-                result(null, data.recordset)
+                result(null, data)
             } else {
                 result(err)
             }
@@ -116,11 +118,40 @@ async function follow(data, result) {
     }
 }
 
-async function unFollow(data, result) {
+async function unFollow(userId, followerId, result) {
+    try {
+        const sqlString  = `delete from followList where followerId  = @followerId and userId = @userId`
+        const pool = await connect;
+        return await pool.request()
+        .input('userId', sql.Int, userId)
+        .input('followerId', sql.Int, followerId)
+        .query(sqlString, (err, data) => {
+            if (!err) { 
+                result(null, data)
+            } else {
+                result(err)
+            }
+        })
+    } catch(err) {
+        result(err)
+    }
+}
 
+async function followCount(userId) {
+    try {
+        const sqlString  = `select * from followList where userId = @userId
+        select * from followList where followerId = @userId`
+        const pool = await connect;
+        const data = await pool.request()
+        .input('userId', sql.Int, userId)
+        .query(sqlString)
+        return data.recordsets
+    } catch(err) {
+        result(err)
+    }
 }
 
 module.exports = {
     findUser, newUser, updateUser, searchByUserName, searchByNickName, 
-    follow, unFollow
+    follow, unFollow, followCount
 }

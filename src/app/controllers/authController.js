@@ -40,6 +40,8 @@ async function checkLogin(req, res) {
                 nickName: data.nickName,
                 role: data.role
             }, Jwt_Secret, {expiresIn: "1h"})
+            res.locals.userName = data.userName
+            res.locals.nickName = data.nickName
             res.cookie('accessToken', accessToken)
             res.redirect('/me/home')
         })

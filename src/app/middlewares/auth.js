@@ -37,6 +37,8 @@ function verifyToken (req, res, next) {
         res.cookie('email', data.email)
         res.cookie('role', data.role)
         res.cookie('userId', data.userId)
+        res.cookie('nickName', data.nickName)
+        res.locals.userId = data.userId
         res.locals.nickName = data.nickName
         res.locals.userName = data.userName
         res.locals.roleView = function () {
