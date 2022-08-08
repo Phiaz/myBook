@@ -2,12 +2,16 @@ const {connect, sql } = require('../../config/database');
 
 //
 
-async function newReview(user, data, result) {
+async function newReview(user, data, imgLink, result) {
         try {
             const userId = user.userId
-            var sqlString = `INSERT INTO tweet(bookName, author, content, userId) values (N'${data.bookName}', N'${data.author}', N'${data.content}', N'${userId}')`
+            var sqlString = `INSERT INTO tweet(bookName, author, content, img, userId, userName, nickName)
+             values (N'${data.bookName}', N'${data.author}', N'${data.content}',
+            @imgLink,
+            N'${userId}', N'${user.userName}', N'${user.nickName}')`
             const pool = await connect;
             return await pool.request()
+            .input('imgLink', sql.NVarChar, imgLink)
             .query(sqlString, (err, review) => {
                 if (!err) { 
                     result(null, data.bookName)
@@ -88,7 +92,24 @@ async function testAllReviews(user, result) {
         result(error)
     }
 }
+
+async function newFeed(userId) {
+    try {
+        var sqlString = `(select * from tweet where userId = @userId
+            union
+            select * from tweet where userId in (
+            select userId from followList where followerId = @userId))
+            order by createdDate DESC`
+            const pool = await connect;
+            const data = await pool.request()
+            .input('userId',sql.Int, userId)
+            .query(sqlString)
+            return data.recordset
+    } catch (error) {
+        console.log(error)
+    }
+}
 async function reviewCount(req, res, next) {}
 module.exports = {
-    newReview, allReviews, findReview, searchReviewByName, testAllReviews
+    newReview, allReviews, findReview, searchReviewByName, testAllReviews, newFeed
 }

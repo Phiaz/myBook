@@ -2,7 +2,7 @@
 <div class="container mt-4" >
 	<div class="row m-b-r m-t-3">
 		<div class="col-md-2 offset-md-1">
-			<img src="https://i.pinimg.com/474x/e6/e2/d0/e6e2d0e4989ad9a60fbd1c638714864b.jpg" alt="" class="img-circle">
+			<img src="{{{img}}}" alt="" class="img-circle">
 		</div>
 		<div class="col-md-9 p-t-2">
 			<h2 class="h2">
@@ -19,7 +19,7 @@
 
 
 <div class="mt-4 container">
-<form method ="POST" action ="/me/setting/{{userData.userId}}?_method=PATCH">
+<form method ="POST" action ="/me/setting/{{userData.userId}}?_method=PATCH" enctype="multipart/form-data">
   <div class="form-row">
     <div class="form-group col-md-3">
       <label for="nickName">Biệt danh</label>
@@ -44,6 +44,11 @@
       <label for="fullName">Họ và tên</label>
       <input type="text" class="form-control" id="fullName" name="fullName" placeholder="{{userData.fullName}}">
     </div>
+  </div>
+  <div class="mb-3 form-group">
+      <label for="formFile" class="form-label">Ảnh đại diện</label>
+      <input class="form-control" type="file" name ="img">
+      <span class="form-message"></span>
   </div>
   <button type="submit" class="btn btn-primary">Xác nhận thay đổi</button>
 </form>

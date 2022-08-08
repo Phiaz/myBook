@@ -1,7 +1,7 @@
 <div class="mt-4">
     <h3>Đăng reviews</h3>
 
-    <form method="POST" id="form-1">
+    <form method="POST" id="form-1" enctype = "multipart/form-data">
         <div class="mb-3 form-group">
             <label for="bookName">Tên sách</label>
             <input type="text" class="form-control" id="bookName" name="bookName">
@@ -19,7 +19,7 @@
         </div>
         <div class="mb-3 form-group">
             <label for="formFile" class="form-label">Hình minh họa</label>
-            <input class="form-control" type="file" id="formFile">
+            <input class="form-control" type="file" name ="img">
             <span class="form-message"></span>
         </div>
         <button type="submit" class="btn btn-primary">Đăng</button>

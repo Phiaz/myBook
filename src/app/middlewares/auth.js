@@ -41,6 +41,7 @@ function verifyToken (req, res, next) {
         res.locals.userId = data.userId
         res.locals.nickName = data.nickName
         res.locals.userName = data.userName
+        res.locals.img = data.img
         res.locals.roleView = function () {
             if (data.role == 'admin') {
             return `<hr class="dropdown-divider">

@@ -1,5 +1,6 @@
 const Review = require('../../models/Review')
 const catchError = require('../catchError')
+const cloudinary = require('../../../config/cloudinary')
 // const firebase = require('../../../config/firebase')
 // [GET] /me/reviews/upload
 function upload(req, res, next) {
@@ -10,13 +11,16 @@ function allReviews(req, res, next) {
     res.render('me/storedReviews', {layout: 'userLayout'})
 }
 
-function uploadReview(req, res, next) {
-    Review.newReview(req.cookies, req.body, (err, bookName) => {
-        if (!err) {
-            res.redirect(`/me/profile/${req.cookies.userName}`)
-        } else {
-            catchError(res , err)
-        }
+async function uploadReview(req, res, next) {
+    cloudinary.uploadSingle(req.file.path)
+    .then((result) => {
+        Review.newReview(req.cookies, req.body, result.url, (err) => {
+            if (!err) {
+                res.redirect(`/me/profile/${req.cookies.userId}`)
+            } else {
+                catchError(res , err)
+            }
+        })
     })
 }
 

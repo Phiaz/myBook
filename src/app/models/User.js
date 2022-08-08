@@ -40,7 +40,7 @@ async function newUser(data, result) {
     }
 }
 
-async function updateUser(id ,user, result) {
+async function updateUser(id ,user, imgLink, result) {
     try {
         const hashedPassword = md5(user.password)
         const sqlString  = `update Users
@@ -49,10 +49,12 @@ async function updateUser(id ,user, result) {
             password = '${hashedPassword}', 
             firstName = N'${user.firstName}',
             lastName = N'${user.lastName}',
-            fullName = N'${user.fullName}'
+            fullName = N'${user.fullName}',
+            img = @imgLink
             where userId = ${id}`
         const pool = await connect;
         return await pool.request()
+        .input('imgLink', sql.VarChar, imgLink)
         .query(sqlString, (err, data) => {
             if (!err) { 
                 result(null, data)
@@ -147,7 +149,7 @@ async function followCount(userId) {
         .query(sqlString)
         return data.recordsets
     } catch(err) {
-        result(err)
+        console.log(err)
     }
 }
 

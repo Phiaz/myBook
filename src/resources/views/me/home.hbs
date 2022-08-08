@@ -1,1 +1,17 @@
-<h1>home page</h1>
+<div class="container-sm mt-4">
+    {{#each reviews}}
+    <div class="card mt-4">
+    <div class="card-body">
+        <h5 class="card-title">{{this.bookName}}</h5>
+        <p class="card-text">by: {{this.nickName}}</p>
+        <p class="card-text">Mô tả:{{this.description}}</p>
+        {{!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
+    </div>
+    {{#if this.img}}
+    <img src="{{this.img}}" class="card-img-bottom" alt="...">
+    {{/if}}
+    
+    </div>
+    {{/each}}
+</div>
+

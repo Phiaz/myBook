@@ -1,4 +1,5 @@
 const { response } = require('express')
+const cloudinary = require('../../../config/cloudinary')
 const Review = require('../../models/Review')
 const User = require('../../models/User')
 const catchError = require('../catchError')
@@ -23,13 +24,16 @@ function setting(req, res, next) {
 }
 
 function profileUpdate(req, res, next) {
-    User.updateUser(req.cookies.userId, req.body, (err, data) => {
-        if (!err) {
-            // res.json(data)
-            res.redirect(`/me/profile/${req.cookies.userName}`)
-        } else {
-            catchError(res , err)
-        }
+    cloudinary.uploadSingle(req.file.path)
+    .then((result) => {
+        User.updateUser(req.cookies.userId, req.body, result.url, (err) => {
+            if (!err) {
+                // res.json(data)
+                res.redirect(`/me/profile/${req.cookies.userId}`)
+            } else {
+                catchError(res , err)
+            }
+        })
     })
 }
 
