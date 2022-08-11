@@ -1,0 +1,73 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User Id</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Quyền</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users}}
+    <tr>
+      <th scope="row">{{this.userId}}</th>
+      <th scope="row">{{this.userName}}</th>
+      <th scope="row">{{this.email}}</th>
+      <th scope="row">{{this.fullName}}</th>
+      <th class="col-auto my-1">
+    <form class="form-inline my-2 my-lg-0" action="/admin/user/{{this.userId}}?_method=PATCH" method ="post">
+      <select class="btn " name="action" required>
+          <option value="">{{this.role}}</option>
+          <option value ="user">user</option>
+          <option value ="admin">admin</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Xác nhận</button>
+    </form>
+    </th>
+      <td><a href="" class="btn btn-link" data-toggle="modal" data-target="#delete-user-modal" id = 'delete-button' data-id="{{this.userId}}">Xóa</a></td>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+{{!-- Confirm delete user --}}
+<div id="delete-user-modal" class="modal"  tabindex="-1">
+  <div class="modal-dialog">  
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác nhận xóa.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Hành động này sẽ xóa vĩnh viễn user này và không thể khôi phục được. Bạn có chắc chắn muốn xóa?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-delete" type="button" id="user-delete" class="btn btn-danger">Đồng ý xóa</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- hidden from --}}
+<form name="delete-form" method="POST"></form>
+<form name="adjust-form" method="POST"></form>
+
+{{!-- Scripts --}}
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var idValue;
+    var deleteForms = document.forms['delete-form'];
+    var btnDeleteCourse = document.getElementById('btn-delete')
+    $('#delete-user-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)  //Button that triggered the modal
+      idValue = button.data('id');
+    });
+    btnDeleteCourse.onclick = function(){ 
+      deleteForms.action = 'user/' + idValue +'?_method=DELETE';
+      deleteForms.submit()
+    }
+  })
+</script>

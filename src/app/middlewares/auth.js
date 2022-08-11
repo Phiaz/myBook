@@ -55,19 +55,26 @@ function verifyToken (req, res, next) {
     }
 }
 
-// function adminChecked (req, res, next) {
-//     res.locals.roleView = function () {
-//         if (req.cookies.role == 'admin') {
-//         return `<hr class="dropdown-divider">
-//             <a class="dropdown-item" href="/me/stored">Quản lý người dùng</a>`
-//         }
-//     }
-//     next()
-// }
+function adminChecked (req, res, next) {
+    const accessToken = req.cookies.accessToken
+    if (accessToken) {
+        jwt.verify(accessToken, Jwt_Secret, (err, data) => {
+        if(err) {
+            return res.render('err', {layout: 'errorLayout', err: "Phiên đăng nhập hết hạn, bạn cần phải đăng nhập lại"})
+        }
+        if(data.role !== 'admin') {
+            return res.render('err', {layout: 'errorLayout', err: "Bạn không có quyền truy cập trang này"})
+        }
+        next()
+        })
+    } else {
+    return res.render('err', {layout: 'errorLayout', err: "Bạn không có quyền truy cập trang này"})
+    }
+}
 
 
 
 
 module.exports = {
-    checkExisted, verifyToken
+    checkExisted, verifyToken, adminChecked
 }

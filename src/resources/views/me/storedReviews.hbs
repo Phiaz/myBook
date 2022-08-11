@@ -24,12 +24,15 @@
             <th scope="col" colspan="2">#</th>
             <th scope="col">
               Tên sách
+              {{{ 'name'}}}
             </th>
             <th scope="col">
               Tác giả
+              {{{ 'author'}}}
             </th>
             <th scope="col">
               Lần cuối cập nhật
+              {{{ 'updatedAt'}}}
             </th>
             <td></td>
             <td></td>
@@ -52,15 +55,99 @@
                 <a href="/books/{{this._id}}/edit" class="btn btn-link">Chỉnh sửa</a>
                 <td><a href="" class="btn btn-link" data-toggle="modal" data-target="#delete-book-modal" id = 'delete-button' data-id="{{this._id}}">Xóa</a></td>
                 </td>
-            </tr> 
+            </tr>
             {{else}}
             <tr>
-              <td colspan="5" class="text-center">Bạn chưa đăng bất kỳ review nào.</td>
-            </tr>
-            <tr>
-              <td colspan="5" class="text-center"><a href="/me/review/upload">Nhấn vào đây để đăng review đầu tiên của mình nhé. Cố lên nào 👻</a></td>
+                <td colspan="5" class="text-center">Bạn chưa đăng khóa học nào. <a href="/books/create">Nhấn vào đây để đăng khóa học</a></td>
             </tr>
             {{/each}}
         </tbody>
 </table>
 </form>
+
+{{! -- Confirm delete course}}
+<div id="delete-book-modal" class="modal"  tabindex="-1">
+  <div class="modal-dialog">  
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác nhận xóa.</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Hành động này sẽ xóa đi sách của bạn và lưu vào thùng rác. Bạn có chắc chắn muốn xóa?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-delete" type="button" id="delete-book" class="btn btn-danger">Đồng ý xóa</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- hidden from --}}
+<form name="delete-form" method="POST">
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var idValue;
+    var deleteForms = document.forms['delete-form']
+    var btnDeleteCourse = document.getElementById('btn-delete')
+    // Lấy checkbox tất cả
+    var checkboxAll = $('#checkbox-all')
+    // Lấy 5 checkbox bằng Jquery
+    var bookItemCheckbox = $('input[name="bookIds[]"]')
+    //Lấy nút submit
+    var checkAllSubmitBtn = $('.check-all-submit-btn')
+    //Lấy form tổng
+    var containerForm = document.forms['container-form']
+    $('#delete-book-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)  //Button that triggered the modal
+
+      idValue = button.data('id');
+    });
+
+    btnDeleteCourse.onclick = function(){ 
+      deleteForms.action = '/books/' + idValue +'?_method=DELETE';
+      deleteForms.submit();
+    }
+
+    //Config check all
+    checkboxAll.change(function () {
+      var isCheckedAll = $(this).prop('checked')
+      
+      {{!-- if(isCheckedAll) {
+        bookItemCheckbox.prop('checked',true)
+      } else {
+        bookItemCheckbox.prop('checked',false)
+      } --}} // Đoạn này có thể được viết như bên dưới
+      bookItemCheckbox.prop('checked',isCheckedAll)
+      renderCheckAllSubmitBtn()
+    })
+
+    //Book item checkbox changed - biến isCheckedAll này nằm trong 1 function khác, do tính chất scope nên sẽ là 1 biến mới so với isCheckedAll bên trên
+    bookItemCheckbox.change(function () {
+      var isCheckedAll = bookItemCheckbox.length === $('input[name="bookIds[]"]:checked').length
+      checkboxAll.prop('checked', isCheckedAll)
+      renderCheckAllSubmitBtn()
+    })
+    
+    // Re-render submit all btn
+    function renderCheckAllSubmitBtn() {
+      var checkedCount = $('input[name="bookIds[]"]:checked').length
+      if (checkedCount > 0) {
+        checkAllSubmitBtn.attr('disabled', false)
+      } else {
+        checkAllSubmitBtn.attr('disabled',true)
+      }
+    }
+
+    // Check all submit button clicked 
+    checkAllSubmitBtn.click('submit', function(e) { 
+      var isSubmittable = !$(this).hasClass('disabled');
+      if(!isSubmittable) {
+        e.preventDefault();
+      }
+    })
+  });
+</script>

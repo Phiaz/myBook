@@ -10,7 +10,7 @@ const auth = require('../app/middlewares/auth')
 
 function route(app) {
     app.use('/auth', authRouter)
-    app.use('admin', adminRouter)
+    app.use('/admin',auth.verifyToken, auth.adminChecked, adminRouter)
     app.use('/me',auth.verifyToken, meRouter)
     app.use('/public', publicRouter)
     app.use('/', siteRouter)

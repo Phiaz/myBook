@@ -1,17 +1,35 @@
-<div class="container-sm mt-4">
-    {{#each reviews}}
-    <div class="card mt-4">
-    <div class="card-body">
+  <div class="container mt-4">
+  {{#each reviews}}
+    <div class="card mt-4" style="width: 35rem; margin-left: 200px">
+            <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{this.userName}}</li>
+      </ul>
+      <img src="{{this.img}}" style="" class="card-img-top" alt="...">
+      <div class="card-body">
         <h5 class="card-title">{{this.bookName}}</h5>
-        <p class="card-text">by: {{this.nickName}}</p>
-        <p class="card-text">Mô tả:{{this.description}}</p>
-        {{!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
-    </div>
-    {{#if this.img}}
-    <img src="{{this.img}}" class="card-img-bottom" alt="...">
-    {{/if}}
-    
+        <p class="card-text">Description</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{this.author}}</li>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
     </div>
     {{/each}}
-</div>
+
+<form action="">
+  <nav class="mt-4" style= "margin-bottom: 10px; margin-left: 200px " aria-label="Page navigation example">
+      <ul class="pagination">
+        {{#each pagination}}
+        <input class="page-item btn btn-primary" type ="submit" class="page-link" value="{{this}}" name="page">
+        {{/each}}
+      </ul>
+    </nav>
+</form>
+  </div>
+
+
+
 
