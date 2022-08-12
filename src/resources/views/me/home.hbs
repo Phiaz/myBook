@@ -2,7 +2,7 @@
   {{#each reviews}}
     <div class="card mt-4" style="width: 35rem; margin-left: 200px">
             <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{this.userName}}</li>
+        <a href="/public/{{this.userId}}"><li class="list-group-item">{{this.userName}}</li></a>
       </ul>
       <img src="{{this.img}}" style="" class="card-img-top" alt="...">
       <div class="card-body">
@@ -13,8 +13,8 @@
         <li class="list-group-item">{{this.author}}</li>
       </ul>
       <div class="card-body">
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
+        <a href="#" class="card-link">Xem bài viết</a>
+        <a href="#" class="card-link">Xem trang cá nhân</a>
       </div>
     </div>
     {{/each}}

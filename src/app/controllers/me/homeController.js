@@ -11,8 +11,8 @@ async function home(req, res, next) {
     for (let i = 1; i <= pageNumber; ++i) {
         pageCount.push(i)
     }
-    console.log(newFeedData.length)
     const newFeed = newFeedData.slice((page - 1)*pageItem, (page - 1)*pageItem+  pageItem)
+    // res.json({data:newFeed})
     res.render('me/home', {layout: 'userLayout', reviews: newFeed, pagination : pageCount})
 }
 

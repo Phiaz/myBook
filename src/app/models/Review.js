@@ -80,16 +80,17 @@ async function searchReviewByName(data, result) {
 }
 
 
-async function testAllReviews(user, result) {
+async function findAllReviews(user) {
     try {
         // const userId = userId
         var sqlString = 'select * from tweet where userId = @id'
         const pool = await connect;
-        return await pool.request()
+        const data = await pool.request()
         .input('id',sql.Int, user)
         .query(sqlString)
+        return data.recordsets[0]
     } catch (error) {
-        result(error)
+        console.log(error)
     }
 }
 
@@ -109,7 +110,31 @@ async function newFeed(userId) {
         console.log(error)
     }
 }
-async function reviewCount(req, res, next) {}
+
+async function updateReview(id, data) {
+    try {
+        var sqlString = `update tweet set bookName = N'${data.bookName}', content = N'${data.content}', author = N'${data.author}' where tweetId = @id`
+            const pool = await connect;
+            await pool.request()
+            .input('id',sql.Int, id)
+            .query(sqlString)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function deleteReview(id) {
+    try {
+        var sqlString = `delete from tweet where tweetId= @id`
+            const pool = await connect;
+            await pool.request()
+            .input('id',sql.Int, id)
+            .query(sqlString)
+    } catch (error) {
+        console.log(error)
+    }
+}
 module.exports = {
-    newReview, allReviews, findReview, searchReviewByName, testAllReviews, newFeed
+    newReview, allReviews, findReview, searchReviewByName,
+    findAllReviews, newFeed, updateReview, deleteReview
 }

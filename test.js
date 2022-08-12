@@ -31,25 +31,25 @@
 // // // console.log(arr)
 
 // // // find second number
-// // // arr  = [1, 7,7, 7 ,3 ,2, 2 ,4, 4, 5, 6 ,6 ,  6]
+// arr  = [1, 7,7, 7 ,3 ,2, 2 ,4, 4, 5, 6 ,6 ,  6]
 
-// // // arr.sort((a,b) => b - a)
-// // // // console.log(arr)
-// // // function find(arr){
-// // //     for(var i = 0; i < arr.length; i++) {
-// // //         let result = []
-// // //         if (arr[i+1] < arr[i]){
-// // //             let result = []
-// // //             for( var j = 0; j < arr.length - i; j++) {
-// // //                 if(arr[j] === arr[i+1]) {
-// // //                     result.push(arr[j])
-// // //                 } 
-// // //             }
-// // //         return result
-// // //         }
-// // //     }
-// // // }
-// // // console.log(find(arr))
+// arr.sort((a,b) => b - a)
+// // console.log(arr)
+// function find(arr){
+//     for(var i = 0; i < arr.length; i++) {
+//         let result = []
+//         if (arr[i+1] < arr[i]){
+//             let result = []
+//             for( var j = 0; j < arr.length - i; j++) {
+//                 if(arr[j] === arr[i+1]) {
+//                     result.push(arr[j])
+//                 } 
+//             }
+//         return result
+//         }
+//     }
+// }
+// console.log(find(arr))
 
 // // ////////
 // // function bark() {
@@ -126,8 +126,96 @@
 // let string = 'abcxyz123'
 // console.log(string.split("").reverse().join(""))
 /////////////// map
-array = [1, 2 , 3]
-array.forEach((value) => {
-    value*value
-    console.log(array)
-})
+// const object = {
+//     name: 'phi',
+//     age: 22,
+//     location: 'HCM city'
+// }
+
+// // const {name: phiName, age: phiAge, location: address} = object
+// // console.log(phiName)
+// // console.log(phiAge)
+// // console.log(address)
+
+
+// const arr = [1,2,3]
+// const arr2 = [4,5,6]
+// const arr3 = [...arr, ...arr2]
+
+
+// const obj1 = {name: 'phi', age:'22', learn: 'js'}
+// const obj2 = {age: 22}
+// const obj3 = {...obj1}
+// const {name,...rest} = obj1
+// console.log(rest)
+// const cuts = ['Chuck', 'Brisket', 'Shank', 'Short Rib'];
+// cuts.shop = 'MM MEats'
+// console.log(cuts)
+
+// var i = 0
+// name = 'anh'
+// let person = {
+//     name: 'phi',
+//     getName: function() {
+//         return console.log(this.name)
+//     }
+// }
+
+// function logName(params) {
+//     console.log(this.name)
+//     if(params) {
+//         console.log(`this is a params: ${params}`)
+//     }
+// }
+// person.getName()
+// logName.apply(person, ['hihi'])
+
+//
+
+// var a = 1;
+// function b(value) {
+//   a = 2;
+//   var sum = a + value;
+//   return sum;
+// }
+// console.log(b(10))
+// console.log(a); //2
+
+
+
+// var a = 1;
+// function b(value) {
+//   a = 10;
+//   sum = a +value
+//   function a() {}
+// }
+// b()
+// console.log(a);//1
+// console.log(3>2>1)
+// console.log(null == 0)
+
+// array = [1, 2, 3, 6 , 7, 7 , 7 ,8 ,9]
+
+// var a = 1;
+// function b(value) {
+//   a = 2;
+//   var sum = a + value;
+//   return sum;
+// }
+// console.log(b(10))
+// console.log(a); //2
+
+function returnPromise(a) {
+  return new Promise(function(resolve, reject) {
+    if(a) {
+      resolve('good')
+    }
+    else{
+      reject('bad')
+    }
+  })
+}
+
+returnPromise(false)
+.then(result => console.log(result))
+.catch(result => console.log(result))

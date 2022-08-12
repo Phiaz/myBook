@@ -1,64 +1,37 @@
-<form class="mt-4" name="container-form" method = "POST" action = "/books/handle-form-action">
-    <h3>My book</h3>
-    <a href="/me/trash/books">Sách đã xóa ({{deletedCount}} quyển)</a>
-
+<form class="mt-4" name="container-form" method = "POST" action = "/me/review/library/formHandle">
+    <h3>My Reviews</h3>
     <div class="mt-4 d-flex align-items-center ">
-      <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="checkbox-all">
-      <label class="form-check-label" for="checkbox-all">Chọn tất cả</label>
-      </div>
-
-       
-      <select class="form-row aligns-items-center col-auto my-1" name="action" required>
-          <option value="">--Chọn hành động--</option>
-          <option value ="delete">Xóa</option>
-      </select>
-        
-      <button class="btn btn-primary btn-sm select-box-options check-all-submit-btn" disabled="disabled">Áp dụng</button>
-    </div>
+        </div>
     <div class="mt-4"></div>
 
     <table class="table">
         <thead>
             <tr>
-            <th scope="col" colspan="2">#</th>
             <th scope="col">
               Tên sách
-              {{{ 'name'}}}
             </th>
             <th scope="col">
               Tác giả
-              {{{ 'author'}}}
-            </th>
-            <th scope="col">
-              Lần cuối cập nhật
-              {{{ 'updatedAt'}}}
             </th>
             <td></td>
             <td></td>
             </tr>
         </thead>
         <tbody>
-            {{#each courses}}
-            <tr>
-                <td>                
-                  <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="bookIds[]" value="{{this._id}}">
-                  </div>
-                </td>
-                <th scope="row">{{sum @index 1}}</th>
-                <td>{{this.name}}</td>
+            {{#each reviews}}
+            <tr>  
+                <td>{{this.bookName}}</td>
                 <td>{{this.author}}</td>
-                <td>{{this.updatedAt}}</td>
                 <td>
-                <a href="/books/{{this.slug}}" class="btn btn-link">Xem review</a>
-                <a href="/books/{{this._id}}/edit" class="btn btn-link">Chỉnh sửa</a>
-                <td><a href="" class="btn btn-link" data-toggle="modal" data-target="#delete-book-modal" id = 'delete-button' data-id="{{this._id}}">Xóa</a></td>
+                <a href="/me/review/{{this.tweetId}}" class="btn btn-link">Xem review</a>
+                <td><a href="/me/review/edit/{{this.tweetId}}" class="btn btn-link">Chỉnh sửa</a></td>
+                <td><a href="" class="btn btn-link" data-toggle="modal" data-target="#delete-review-modal" id = 'delete-button' data-id="{{this.tweetId}}">Xóa</a></td>
+
                 </td>
             </tr>
             {{else}}
             <tr>
-                <td colspan="5" class="text-center">Bạn chưa đăng khóa học nào. <a href="/books/create">Nhấn vào đây để đăng khóa học</a></td>
+                <td colspan="5" class="text-center">Bạn chưa đăng reviews nào. <a href="/me/review/upload">Nhấn vào đây để đăng reviews nhé</a></td>
             </tr>
             {{/each}}
         </tbody>
@@ -66,7 +39,7 @@
 </form>
 
 {{! -- Confirm delete course}}
-<div id="delete-book-modal" class="modal"  tabindex="-1">
+<div id="delete-review-modal" class="modal"  tabindex="-1">
   <div class="modal-dialog">  
     <div class="modal-content">
       <div class="modal-header">
@@ -74,7 +47,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Hành động này sẽ xóa đi sách của bạn và lưu vào thùng rác. Bạn có chắc chắn muốn xóa?</p>
+        <p>Hành động này sẽ xóa vĩnh viễn reviews của bạn và không thể khôi phục được. Bạn có chắc chắn muốn xóa?</p>
       </div>
       <div class="modal-footer">
         <button id="btn-delete" type="button" id="delete-book" class="btn btn-danger">Đồng ý xóa</button>
@@ -87,67 +60,18 @@
 {{!-- hidden from --}}
 <form name="delete-form" method="POST">
 
-
-<script>
+    <script>
   document.addEventListener('DOMContentLoaded', function() {
     var idValue;
-    var deleteForms = document.forms['delete-form']
+    var deleteForms = document.forms['delete-form'];
     var btnDeleteCourse = document.getElementById('btn-delete')
-    // Lấy checkbox tất cả
-    var checkboxAll = $('#checkbox-all')
-    // Lấy 5 checkbox bằng Jquery
-    var bookItemCheckbox = $('input[name="bookIds[]"]')
-    //Lấy nút submit
-    var checkAllSubmitBtn = $('.check-all-submit-btn')
-    //Lấy form tổng
-    var containerForm = document.forms['container-form']
-    $('#delete-book-modal').on('show.bs.modal', function (event) {
+    $('#delete-review-modal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget)  //Button that triggered the modal
-
       idValue = button.data('id');
     });
-
     btnDeleteCourse.onclick = function(){ 
-      deleteForms.action = '/books/' + idValue +'?_method=DELETE';
-      deleteForms.submit();
+      deleteForms.action = '/me/review/library/' + idValue +'?_method=DELETE';
+      deleteForms.submit()
     }
-
-    //Config check all
-    checkboxAll.change(function () {
-      var isCheckedAll = $(this).prop('checked')
-      
-      {{!-- if(isCheckedAll) {
-        bookItemCheckbox.prop('checked',true)
-      } else {
-        bookItemCheckbox.prop('checked',false)
-      } --}} // Đoạn này có thể được viết như bên dưới
-      bookItemCheckbox.prop('checked',isCheckedAll)
-      renderCheckAllSubmitBtn()
-    })
-
-    //Book item checkbox changed - biến isCheckedAll này nằm trong 1 function khác, do tính chất scope nên sẽ là 1 biến mới so với isCheckedAll bên trên
-    bookItemCheckbox.change(function () {
-      var isCheckedAll = bookItemCheckbox.length === $('input[name="bookIds[]"]:checked').length
-      checkboxAll.prop('checked', isCheckedAll)
-      renderCheckAllSubmitBtn()
-    })
-    
-    // Re-render submit all btn
-    function renderCheckAllSubmitBtn() {
-      var checkedCount = $('input[name="bookIds[]"]:checked').length
-      if (checkedCount > 0) {
-        checkAllSubmitBtn.attr('disabled', false)
-      } else {
-        checkAllSubmitBtn.attr('disabled',true)
-      }
-    }
-
-    // Check all submit button clicked 
-    checkAllSubmitBtn.click('submit', function(e) { 
-      var isSubmittable = !$(this).hasClass('disabled');
-      if(!isSubmittable) {
-        e.preventDefault();
-      }
-    })
-  });
+  })
 </script>

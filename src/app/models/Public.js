@@ -2,7 +2,7 @@ const {connect, sql } = require('../../config/database');
 
 async function findProfile (userId, followerId, result) {
     try {
-        const sqlString = `select userName, userId, nickName, fullName from users where userId = @userId
+        const sqlString = `select userName, userId, nickName, fullName, img from users where userId = @userId
 
         select * from tweet where userId = @userId
         

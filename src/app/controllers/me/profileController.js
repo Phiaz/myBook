@@ -1,8 +1,10 @@
-const { response } = require('express')
 const cloudinary = require('../../../config/cloudinary')
 const Review = require('../../models/Review')
 const User = require('../../models/User')
 const catchError = require('../catchError')
+const jwt = require('jsonwebtoken')
+const { Jwt_Secret } = require('../../../config/key')
+
 
 
 async function profile(req, res, next) {
@@ -28,7 +30,16 @@ function profileUpdate(req, res, next) {
     .then((result) => {
         User.updateUser(req.cookies.userId, req.body, result.url, (err) => {
             if (!err) {
-                // res.json(data)
+                const accessToken = jwt.sign({
+                    userId: req.cookies.userId,
+                    userName: req.cookies.userName,
+                    email: req.cookies.email,
+                    nickName: req.body.nickName,
+                    role: req.cookies.role,
+                    img: result.url
+                }, Jwt_Secret, {expiresIn: "1h"})
+                res.cookie('accessToken', accessToken)
+                res.cookie('userId', req.cookies.userId)
                 res.redirect(`/me/profile/${req.cookies.userId}`)
             } else {
                 catchError(res , err)

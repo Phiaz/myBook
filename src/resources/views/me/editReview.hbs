@@ -1,0 +1,19 @@
+<div class="mt-4">
+    <h3>Chỉnh sửa sách</h3>
+
+    <form method="POST" action="?_method=PATCH">
+        <div class="mb-3">
+            <label for="name">Tên sách</label>
+            <input type="text" class="form-control" value="{{tweet.bookName}}" id="bookName" name="bookName">
+        </div>
+        <div class="mb-3">
+            <label for="description">Review về sách</label>
+            <textarea class="form-control" id="description" name="content">{{tweet.content}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="author">Tác giả</label>
+            <input type="text" class="form-control" value="{{tweet.author}}" id="author" name="author">
+        </div>
+        <button type="submit" class="btn btn-primary">Cập nhật</button>
+    </form>
+</div>

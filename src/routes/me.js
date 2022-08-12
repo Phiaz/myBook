@@ -19,6 +19,9 @@ router.get('/setting', profileController.setting)
 router.get('/review/upload', reviewController.upload)
 router.get('/review/library', reviewController.allReviews)
 router.get('/review/:tweetId', reviewController.detail)
+router.get('/review/edit/:tweetId', reviewController.edit)
+router.patch('/review/edit/:tweetId', reviewController.updateReview)
+router.delete('/review/library/:tweetId', reviewController.deleteReview)
 
 
 // POST Review

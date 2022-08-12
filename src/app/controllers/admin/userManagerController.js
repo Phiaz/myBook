@@ -3,7 +3,6 @@ function userManager (req, res, next) {
     Admin.getAllUser((err, data)=>{
     res.render('admin/userManager', {layout: 'userLayout', users: data});
     })
-    // res.render('admin/userManager', {layout: 'userLayout', users: });
 }
 
 async function deleteUser(req, res, next) {
@@ -13,6 +12,7 @@ async function deleteUser(req, res, next) {
 
 async function setRoleUser(req, res, next) {
     await Admin.setRoleUser(req.params.userId, req.body.action)
+
     res.redirect('/admin/userManagement');
 }
 

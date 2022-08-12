@@ -31,7 +31,7 @@ function verifyToken (req, res, next) {
     if (accessToken) {
         jwt.verify(accessToken, Jwt_Secret, (err, data) => {
         if(err) {
-            return res.render('err', {layout: 'errorLayout', err: "Phiên đăng nhập hết hạn, bạn cần phải đăng nhập lại"})
+            return catchError(res,"Phiên đăng nhập hết hạn, bạn cần phải đăng nhập lại")
         }
         res.cookie('userName', data.userName)
         res.cookie('email', data.email)
@@ -51,24 +51,21 @@ function verifyToken (req, res, next) {
         next()
         })
     } else {
-    return res.render('err', {layout: 'errorLayout', err: "Bạn cần phải đăng nhập để thực hiện chức năng này"})
+        return catchError(res,"Bạn cần phải đăng nhập để thực hiện chức năng này")
     }
 }
 
 function adminChecked (req, res, next) {
     const accessToken = req.cookies.accessToken
     if (accessToken) {
-        jwt.verify(accessToken, Jwt_Secret, (err, data) => {
-        if(err) {
-            return res.render('err', {layout: 'errorLayout', err: "Phiên đăng nhập hết hạn, bạn cần phải đăng nhập lại"})
-        }
+    jwt.verify(accessToken, Jwt_Secret, (err, data) => {
         if(data.role !== 'admin') {
-            return res.render('err', {layout: 'errorLayout', err: "Bạn không có quyền truy cập trang này"})
+            return catchError(res,"Bạn không có quyền truy cập trang này")
         }
         next()
-        })
+    })
     } else {
-    return res.render('err', {layout: 'errorLayout', err: "Bạn không có quyền truy cập trang này"})
+        return catchError(res,"Bạn không có quyền truy cập trang này")
     }
 }
 

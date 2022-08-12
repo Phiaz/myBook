@@ -9,7 +9,7 @@ async function publicProfile(req, res, next) {
     if (accessToken) {
        layoutSetting = 'userLayout'
        if(req.cookies.userId == req.params.userId) {
-        res.redirect('/me/profile')
+        res.redirect(`/me/profile/${req.cookies.userId}`)
        }
        else {
         res.locals.userName = req.cookies.userName
@@ -31,8 +31,8 @@ async function publicProfile(req, res, next) {
             data[1].forEach((tweet) => {
                 tweet.userName = req.params.userName
             })
-            // res.json(data[2])
-            res.render('userProfile', {layout: layoutSetting, user: data[0][0], reviews: data[1].reverse(), isFollow:data[2], following: followList[1], follower: followList[0]})
+            res.render('userProfile', {layout: layoutSetting,
+                user: data[0][0], reviews: data[1].reverse(), isFollow:data[2], following: followList[1], follower: followList[0]})
         } else {
             catchError(res , err)
         }
